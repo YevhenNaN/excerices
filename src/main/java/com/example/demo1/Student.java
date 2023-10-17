@@ -4,16 +4,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Student {
-        private static final Logger logger = LogManager.getLogger("MyCoreLog");
+    private static final Logger logger = LogManager.getLogger("MyCoreLog");
 
-        public static final String id = "my_id";
+    public static final String id = "my_id";
 
-        public static void error(String message) {
-            if (System.getenv(id) != null)
-                logger.error(String.format("%s, %s=%s", message, id, System.getenv(id)));
-            else
-                logger.error(message);
-        }
+    public static void error(String message) {
+        if (System.getenv(id) != null)
+            logger.error(String.format("%s, %s=%s", message, id, System.getenv(id)));
+        else
+            logger.error(message);
+    }
 
     public int searchInsert(int[] nums, int target) {
         if (nums[0] >= target) {
@@ -56,8 +56,8 @@ public class Student {
     }
 
     public String gcdOfStrings(String str1, String str2) {
-            StringBuilder stringBuilder = new StringBuilder();
-return  null;
+        StringBuilder stringBuilder = new StringBuilder();
+        return null;
     }
 
 }

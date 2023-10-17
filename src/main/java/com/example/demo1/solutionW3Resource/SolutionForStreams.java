@@ -76,28 +76,33 @@ public class SolutionForStreams {
     }
 
     public void findMaxAndMin(List<Integer> integers){
-        Integer max = integers.stream().max(Integer::compareTo).orElse(null);
-        System.out.println(max);
-
-        Integer min = integers.stream().min(Integer::compareTo).orElse(null);
-        System.out.println(min);
-    }
-
-    public void findSecondMaxAndMin(List<Integer> integers){
         Integer max = integers.stream()
-                .sorted()
-                .skip(1L)
-                .findFirst()
+                .max(Integer::compareTo)
                 .orElse(null);
 
         System.out.println(max);
 
         Integer min = integers.stream()
+                .min(Integer::compareTo)
+                .orElse(null);
+        System.out.println(min);
+    }
+
+    public void findSecondMaxAndMin(List<Integer> integers){
+        Integer secondMax = integers.stream()
+                .sorted()
+                .skip(1L)
+                .findFirst()
+                .orElse(null);
+
+        System.out.println(secondMax);
+
+        Integer secondMin = integers.stream()
                 .sorted(Comparator.reverseOrder())
                 .skip(1L)
                 .findFirst()
                 .orElse(null);
-        System.out.println(min);
+        System.out.println(secondMin);
     }
 
 
