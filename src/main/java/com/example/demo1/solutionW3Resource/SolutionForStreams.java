@@ -1,4 +1,4 @@
-package com.example.demo1;
+package com.example.demo1.solutionW3Resource;
 
 import java.util.Comparator;
 import java.util.List;

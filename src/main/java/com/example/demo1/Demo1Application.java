@@ -1,5 +1,6 @@
 package com.example.demo1;
 
+import com.example.demo1.solutionW3Resource.SolutionForStreams;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -12,11 +13,7 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.stream.IntStream;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class Demo1Application {
