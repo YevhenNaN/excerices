@@ -13,10 +13,10 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 @SpringBootTest
-class HttpUtility {
+class HttpUtilityTest {
 
     @Test
-    public void test_sendGetRequest() throws IOException, InterruptedException {
+    void test_sendGetRequest() throws IOException, InterruptedException {
         String url = "https://example.com/api";
         String expectedResponse = "{\"foo\": \"bar\"}";
 
@@ -25,12 +25,12 @@ class HttpUtility {
 
         HttpClient httpClientMock = Mockito.mock(HttpClient.class);
 
-        try(MockedStatic<HttpClient> httpClientMockedStatic = Mockito.mockStatic(HttpClient.class)) {
+        try (MockedStatic<HttpClient> httpClientMockedStatic = Mockito.mockStatic(HttpClient.class)) {
             httpClientMockedStatic.when(HttpClient::newHttpClient).thenReturn(httpClientMock);
             Mockito.when(httpClientMock.send(Mockito.any(HttpRequest.class), ArgumentMatchers.<HttpResponse.BodyHandler<String>>any()))
                     .thenReturn(httpResponse);
 
-            String actualResponse = com.example.demo1.HttpManipulation.HttpUtility.sendGetRequest(url);
+            String actualResponse = com.example.demo1.http_manipulation.HttpUtility.sendGetRequest(url);
 
             Assertions.assertEquals(expectedResponse, actualResponse);
         }

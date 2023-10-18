@@ -1,4 +1,4 @@
-package com.example.demo1.HttpManipulation;
+package com.example.demo1.http_manipulation;
 
 import lombok.experimental.UtilityClass;
 

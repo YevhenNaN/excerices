@@ -1,5 +1,8 @@
 package com.example.demo1;
 
+import com.example.demo1.patterns.gof.abstract_factory.AnimalAbstractFactory;
+import com.example.demo1.patterns.gof.abstract_factory.AnimalEra;
+import com.example.demo1.patterns.gof.abstract_factory.AnimalType;
 import com.example.demo1.services.StreamOperationsService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +15,7 @@ public class Demo1Application {
         SpringApplication.run(Demo1Application.class, args);
         StreamOperationsService streamOperationsService = new StreamOperationsService();
         streamOperationsService.performStreamOperations();
+        new AnimalAbstractFactory().createAnimal(AnimalType.SKY, AnimalEra.CENOZOIC);
     }
 
 }
