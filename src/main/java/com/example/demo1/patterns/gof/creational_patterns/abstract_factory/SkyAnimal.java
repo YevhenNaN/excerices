@@ -1,6 +1,6 @@
-package com.example.demo1.patterns.gof.abstract_factory;
+package com.example.demo1.patterns.gof.creational_patterns.abstract_factory;
 
-public class SkyAnimal extends Animal{
+public class SkyAnimal extends Animal {
 
     SkyAnimal(AnimalEra era, String name) {
         super(AnimalType.SKY, era, name);
