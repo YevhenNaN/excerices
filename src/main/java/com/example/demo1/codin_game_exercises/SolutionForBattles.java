@@ -1,5 +1,7 @@
 package com.example.demo1.codin_game_exercises;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class SolutionForBattles {
@@ -50,6 +52,54 @@ public class SolutionForBattles {
             }
         }
 
+    }
+
+    /**
+     * Given a number n, your task is to report the number of its divisors but if n is prime print "PRIME"
+     * For example, if n is 16, the correct answer is 5 because its divisors are 1,2,4,8,16.
+     */
+    public void findDivisors() {
+        Scanner in = new Scanner(System.in);
+        int N = in.nextInt();
+        int sum = 0;
+        for (int i = 1; i <= N; i++){
+            if (N % i == 0) {
+                sum++;
+            }
+        }
+        if (sum == 2) {
+            System.out.println("PRIME");
+        } else {
+            System.out.println(sum);
+        }
+    }
+
+    /**
+     * A triple fibonacci is basically fibonacci but the next sequence is the sum of the previous 3 numbers
+     * 1, 1, 1, 3, 5, 9...
+     * The sequence starts with index 0
+     * Input
+     * The index of the triple fibonacci sequence
+     * Output
+     * The number from the triple fibonacci sequence
+     */
+    public void findTripleFibonacci() {
+        Scanner in = new Scanner(System.in);
+        int index = in.nextInt();
+        Long aLong = createListOfTripleFibonacci(index).get(index);
+        System.out.println(aLong);
+    }
+
+    public List<Long> createListOfTripleFibonacci(int number) {
+        ArrayList<Long> objects = new ArrayList<>();
+        objects.add(1l);
+        objects.add(1l);
+        objects.add(1l);
+        for (int i = 3; i <= number; i++){
+            long sum = objects.get(i-1) + objects.get(i-2) + objects.get(i-3);
+            objects.add(sum);
+        }
+        return objects;
     }
 
 }
