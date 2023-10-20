@@ -6,12 +6,15 @@ import com.example.demo1.patterns.gof.creational_patterns.abstract_factory.Anima
 import com.example.demo1.patterns.gof.creational_patterns.builder.Person;
 import com.example.demo1.patterns.gof.creational_patterns.factory_method.CarFactory;
 import com.example.demo1.patterns.gof.creational_patterns.factory_method.MotorVehicleFactory;
+import com.example.demo1.patterns.gof.creational_patterns.prototype.Employees;
 import com.example.demo1.patterns.gof.creational_patterns.singleton.ClassSingleton;
 import com.example.demo1.patterns.gof.creational_patterns.singleton.EnumSingleton;
 import com.example.demo1.services.StreamOperationsService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+
+import java.util.List;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class Demo1Application {
@@ -46,6 +49,23 @@ public class Demo1Application {
         enumSingleton1.setInfo("Last info class");
         System.out.println(enumSingleton1.getInfo());
         System.out.println(enumSingleton.getInfo());
+
+        //Prototype
+
+        Employees emps = new Employees();
+        emps.loadData();
+
+        //Use the clone method to get the Employee object
+        Employees empsNew = (Employees) emps.clone();
+        Employees empsNew1 = (Employees) emps.clone();
+        List<String> list = empsNew.getEmployeeList();
+        list.add("John");
+        List<String> list1 = empsNew1.getEmployeeList();
+        list1.remove("Pankaj");
+
+        System.out.println("emps List: "+emps.getEmployeeList());
+        System.out.println("empsNew List: "+list);
+        System.out.println("empsNew1 List: "+list1);
 
     }
 
