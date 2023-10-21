@@ -1,4 +1,4 @@
-package com.example.demo1.patterns.gof.creational_patterns.prototype;
+package com.example.demo1.patterns.gof.creational.prototype;
 
 import java.util.ArrayList;
 import java.util.List;

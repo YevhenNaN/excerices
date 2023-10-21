@@ -1,4 +1,4 @@
-package com.example.demo1.patterns.gof.creational_patterns.singleton;
+package com.example.demo1.patterns.gof.creational.singleton;
 
 import lombok.Getter;
 

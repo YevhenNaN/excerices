@@ -1,4 +1,4 @@
-package com.example.demo1.patterns.gof.creational_patterns.builder;
+package com.example.demo1.patterns.gof.creational.builder;
 
 import lombok.Getter;
 import lombok.Setter;

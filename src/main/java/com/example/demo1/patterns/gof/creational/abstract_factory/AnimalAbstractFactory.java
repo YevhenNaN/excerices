@@ -1,4 +1,4 @@
-package com.example.demo1.patterns.gof.creational_patterns.abstract_factory;
+package com.example.demo1.patterns.gof.creational.abstract_factory;
 
 /**
  * When to Use Abstract Factory Pattern:

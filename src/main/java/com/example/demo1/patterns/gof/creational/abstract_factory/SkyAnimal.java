@@ -1,4 +1,4 @@
-package com.example.demo1.patterns.gof.creational_patterns.abstract_factory;
+package com.example.demo1.patterns.gof.creational.abstract_factory;
 
 public class SkyAnimal extends Animal {
 
