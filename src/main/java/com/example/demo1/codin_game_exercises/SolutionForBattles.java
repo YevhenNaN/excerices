@@ -3,6 +3,7 @@ package com.example.demo1.codin_game_exercises;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class SolutionForBattles {
 
@@ -62,7 +63,7 @@ public class SolutionForBattles {
         Scanner in = new Scanner(System.in);
         int N = in.nextInt();
         int sum = 0;
-        for (int i = 1; i <= N; i++){
+        for (int i = 1; i <= N; i++) {
             if (N % i == 0) {
                 sum++;
             }
@@ -95,11 +96,32 @@ public class SolutionForBattles {
         objects.add(1l);
         objects.add(1l);
         objects.add(1l);
-        for (int i = 3; i <= number; i++){
-            long sum = objects.get(i-1) + objects.get(i-2) + objects.get(i-3);
+        for (int i = 3; i <= number; i++) {
+            long sum = objects.get(i - 1) + objects.get(i - 2) + objects.get(i - 3);
             objects.add(sum);
         }
         return objects;
+    }
+
+    public static String[] dirReduc(String[] arr) {
+        Stack<String> stack = new Stack<>();
+
+        for (String direction : arr) {
+            if (!stack.isEmpty() && oppositeDirection(stack.peek(), direction)) {
+                stack.pop(); // cancel out opposite directions
+            } else {
+                stack.push(direction); // push non-opposite directions onto the stack
+            }
+        }
+
+        return stack.toArray(new String[0]);
+    }
+
+    private static boolean oppositeDirection(String dir1, String dir2) {
+        return (dir1.equals("NORTH") && dir2.equals("SOUTH")) ||
+                (dir1.equals("SOUTH") && dir2.equals("NORTH")) ||
+                (dir1.equals("EAST") && dir2.equals("WEST")) ||
+                (dir1.equals("WEST") && dir2.equals("EAST"));
     }
 
 }
