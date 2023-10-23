@@ -124,4 +124,18 @@ public class SolutionForBattles {
                 (dir1.equals("WEST") && dir2.equals("EAST"));
     }
 
+    public static String print(int size) {
+        if (size % 2 == 0 || size <= 0) {
+            return null;
+        }
+
+        StringBuilder diamond = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            int spaces = Math.abs(size / 2 - i);
+            int stars = size - 2 * spaces;
+            diamond.append(" ".repeat(spaces)).append("*".repeat(stars)).append("\n");
+        }
+        return diamond.toString();
+    }
+
 }
