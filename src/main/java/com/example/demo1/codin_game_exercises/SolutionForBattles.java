@@ -138,4 +138,32 @@ public class SolutionForBattles {
         return diamond.toString();
     }
 
+    public static void printLadderGorFireman(int size) {
+        Scanner in = new Scanner(System.in);
+        int floor = in.nextInt();
+        for (int i = 0; i < floor; i++) {
+            System.out.print("#  #\n####\n");
+        }
+        System.out.println("#  #\n");
+    }
+
+    public void parseFromHexToDecimal() {
+        Scanner in = new Scanner(System.in);
+        String number = in.next();
+
+        int decimal = Integer.parseInt(number, 16);
+
+        System.out.println(decimal);
+    }
+
+    public void parseFromHexToDecima1l() {
+        Scanner in = new Scanner(System.in);
+        int p = in.nextInt();
+        int h = in.nextInt();
+        int r = in.nextInt();
+        String s = p * h > r ? "YES" : p * h == r ? "BARELY" : "NO";
+        System.out.println(s);
+
+    }
+
 }
