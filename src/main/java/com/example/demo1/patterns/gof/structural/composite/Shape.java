@@ -9,6 +9,5 @@ package com.example.demo1.patterns.gof.structural.composite;
  * Composite - It consists of leaf elements and implements the operations in base component.
  */
 public interface Shape {
-
     public void draw(String fillColor);
 }
