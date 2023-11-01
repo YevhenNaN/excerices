@@ -1,11 +1,50 @@
-package com.example.demo1.codin_game_exercises;
+package com.example.demo1.solutionW3Resource.codin_game_exercises;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
 public class SolutionForBattles {
+
+    public boolean containsDuplicate(int[] nums) {
+        long count = Arrays.stream(nums).distinct().count();
+        return nums.length == count;
+    }
+
+    public boolean isAnagram(String s, String t) {
+        char[] charArray = s.toCharArray();
+        char[] charArray1 = t.toCharArray();
+        int sum = 0;
+        if (s.length() == t.length()) {
+            for (int i = 0; i < s.length(); i++){
+                for (int j = 0; j < t.length(); j++){
+                    if (charArray[i] == charArray1[j]) {
+                        charArray1[j] = '0';
+                        sum++;
+                        break;
+                    }
+                }
+            }
+        }
+        return sum == s.length();
+    }
+
+    public boolean isAnagram1(String s, String t) {
+        char[] charArray = s.toCharArray();
+        char[] charArray1 = t.toCharArray();
+        Arrays.sort(charArray);
+        Arrays.sort(charArray1);
+        int compare = Arrays.compare(charArray, charArray1);
+        return 0 == compare;
+    }
+
+    public int[] twoSum(int[] nums, int target) {
+        for(int i = 1; i < nums.length; i++){
+
+        }
+    }
 
     //You must convert a string of commands (separated by "-") into a message such that
     // (0) converts a number to the lower alphabet (1) converts a number to the UPPER ALPHABET and (2) just is the number

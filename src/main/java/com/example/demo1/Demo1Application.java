@@ -18,6 +18,7 @@ import com.example.demo1.patterns.gof.structural.adapter.charger.SocketClassAdap
 import com.example.demo1.patterns.gof.structural.adapter.charger.SocketObjectAdapterImpl;
 import com.example.demo1.patterns.gof.structural.adapter.charger.Volt;
 import com.example.demo1.services.StreamOperationsService;
+import com.example.demo1.solutionW3Resource.codin_game_exercises.SolutionForBattles;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -29,6 +30,10 @@ public class Demo1Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Demo1Application.class, args);
+        SolutionForBattles solutionForBattles = new SolutionForBattles();
+        boolean anagram = solutionForBattles.isAnagram("anagram", "nagaram");
+        System.out.println(anagram);
+
         StreamOperationsService streamOperationsService = new StreamOperationsService();
         streamOperationsService.performStreamOperations();
         creationPatternExamples();

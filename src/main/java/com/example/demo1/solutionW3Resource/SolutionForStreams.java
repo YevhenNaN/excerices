@@ -3,8 +3,6 @@ package com.example.demo1.solutionW3Resource;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 /**
  * Solutions for w3resource.com streams
