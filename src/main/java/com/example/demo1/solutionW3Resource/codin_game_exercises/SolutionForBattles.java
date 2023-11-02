@@ -40,12 +40,6 @@ public class SolutionForBattles {
         return 0 == compare;
     }
 
-    public int[] twoSum(int[] nums, int target) {
-        for(int i = 1; i < nums.length; i++){
-
-        }
-    }
-
     //You must convert a string of commands (separated by "-") into a message such that
     // (0) converts a number to the lower alphabet (1) converts a number to the UPPER ALPHABET and (2) just is the number
     public void decodeString() {
@@ -130,7 +124,7 @@ public class SolutionForBattles {
         System.out.println(aLong);
     }
 
-    public List<Long> createListOfTripleFibonacci(int number) {
+    private List<Long> createListOfTripleFibonacci(int number) {
         ArrayList<Long> objects = new ArrayList<>();
         objects.add(1l);
         objects.add(1l);
