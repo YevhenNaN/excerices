@@ -33,6 +33,8 @@ public class Demo1Application {
         SolutionForBattles solutionForBattles = new SolutionForBattles();
         boolean anagram = solutionForBattles.isAnagram("anagram", "nagaram");
         System.out.println(anagram);
+        System.out.println(solutionForBattles.maxIntViaLoop(new int[] {1,32,1,23,21,31,2,111}));
+
 
         StreamOperationsService streamOperationsService = new StreamOperationsService();
         streamOperationsService.performStreamOperations();

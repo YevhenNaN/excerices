@@ -8,6 +8,73 @@ import java.util.Stack;
 
 public class SolutionForBattles {
 
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Please, enter any text: ");
+
+        String text = sc.nextLine();
+        int amountOfWords = getWordsAmount(text);
+
+        System.out.println("Amount of words in your text: " + amountOfWords);
+    }
+
+    private static int getWordsAmount(String text) {
+        String[] arrayOfString = text.split(" ");
+        return arrayOfString.length;
+    }
+
+    public static String[] filterWordsByLength(int minLength, String[] words) {
+		return (String[]) Arrays.stream(words).filter(word -> word.length() > minLength).toArray();
+    }
+
+    int calculateAmountOfWords(String[] words) {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Please, enter any text: ");
+        String[] split = sc.nextLine().split(" ");
+        return split.length;
+    }
+
+    public static void drawRectangle(int height, int width) {
+        for (int i = 0; i < width; i++) {
+            System.out.print("*");
+        }
+        System.out.println(); // Move to the next line
+
+        // Draw sides
+        for (int i = 0; i < height - 2; i++) {
+            System.out.print("*");
+            for (int j = 0; j < width - 2; j++) {
+                System.out.print(" ");
+            }
+            System.out.println("*");
+        }
+
+        // Draw bottom border
+        for (int i = 0; i < width; i++) {
+            System.out.print("*");
+        }
+        System.out.println(); // Move to the next line
+    }
+
+    public int maxInt(int [] array) {
+        if (array.length == 0) {
+            return 0;
+        }
+        return Arrays.stream(array).max().getAsInt();
+    }
+
+    public int maxIntViaLoop(int [] array) {
+        int[] ints = Arrays.copyOf(array, array.length);
+        int maxInt = array[0];
+        for(int i = 1; i < array.length; i++) {
+            if (array[i] > maxInt) {
+                maxInt = array[i];
+            }
+        }
+        return maxInt;
+    }
+
     public boolean containsDuplicate(int[] nums) {
         long count = Arrays.stream(nums).distinct().count();
         return nums.length == count;
@@ -18,8 +85,8 @@ public class SolutionForBattles {
         char[] charArray1 = t.toCharArray();
         int sum = 0;
         if (s.length() == t.length()) {
-            for (int i = 0; i < s.length(); i++){
-                for (int j = 0; j < t.length(); j++){
+            for (int i = 0; i < s.length(); i++) {
+                for (int j = 0; j < t.length(); j++) {
                     if (charArray[i] == charArray1[j]) {
                         charArray1[j] = '0';
                         sum++;
