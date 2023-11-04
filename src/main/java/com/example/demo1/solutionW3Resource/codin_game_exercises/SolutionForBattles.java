@@ -3,10 +3,14 @@ package com.example.demo1.solutionW3Resource.codin_game_exercises;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
 
 public class SolutionForBattles {
+
+    private static Random random = new Random();  // Compliant
+
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -21,6 +25,13 @@ public class SolutionForBattles {
     private static int getWordsAmount(String text) {
         String[] arrayOfString = text.split(" ");
         return arrayOfString.length;
+    }
+
+    public static String firstCharToTitleCase(String string) {
+        String lowerCase = string.toLowerCase();
+        String[] split = lowerCase.split(" ");
+        String string1 = Arrays.toString(Arrays.stream(split).map(s -> s.substring(0, 1).toUpperCase() + s.substring(1)).toArray());
+        return string1.replaceAll(",", "");
     }
 
     public static String[] filterWordsByLength(int minLength, String[] words) {
@@ -56,6 +67,69 @@ public class SolutionForBattles {
         }
         System.out.println(); // Move to the next line
     }
+
+    public static int[] generateRandomArray(int amountOfElements) {
+        Random random = new Random();
+        int[] array = new int[amountOfElements];
+        for (int i = 0; i < amountOfElements; i++) {
+            array[i] = random.nextInt(100); // Assuming random integers between 0 and 99
+        }
+        return array;
+    }
+
+    public static int[] extendArray(int[] arr) {
+        int[] ints = Arrays.copyOf(arr, arr.length * 2);
+        for (int i = arr.length; i < ints.length;  i++) {
+            ints[i] = arr[i - arr.length]*2;
+        }
+        return ints;
+    }
+
+    public static int gcdRecursive(int firstNumber, int secondNumber) {
+        int length = Math.max(firstNumber, secondNumber);
+        for (int i = length; i > 0; i--){
+            if (firstNumber % i == 0 && secondNumber % i == 0) {
+                return i;
+            }
+        }
+        return 1;
+    }
+    public static int sumDigitsInNumber(int number) {
+        int sum = 0;
+        while (number != 0) {
+            sum += number % 10; //5 +
+            number = number / 10;//13
+        }
+        return Math.abs(sum);
+    }
+
+
+    public static void rotate90(double[][] matrix) {
+        int size = matrix.length;
+        double[][] rotatedMatrix = new double[size][size];
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                rotatedMatrix[j][size - 1 - i] = matrix[i][j];
+            }
+        }
+
+        for (int i = 0; i < size; i++) {
+            System.arraycopy(rotatedMatrix[i], 0, matrix[i], 0, size);
+        }
+    }
+
+    public static void rotate180(double[][] matrix) {
+        rotate90(matrix);
+        rotate90(matrix);
+    }
+
+    public static void rotate270(double[][] matrix) {
+        rotate90(matrix);
+        rotate90(matrix);
+        rotate90(matrix);
+    }
+
 
     public int maxInt(int [] array) {
         if (array.length == 0) {
