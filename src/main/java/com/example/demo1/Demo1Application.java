@@ -30,6 +30,8 @@ public class Demo1Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Demo1Application.class, args);
+        Car car = new Car();
+        car.honk();
         SolutionForBattles solutionForBattles = new SolutionForBattles();
         boolean anagram = solutionForBattles.isAnagram("anagram", "nagaram");
         System.out.println(anagram);
@@ -140,4 +142,39 @@ public class Demo1Application {
         };
     }
 
+}
+
+interface Vehicle {
+    void start();
+
+    void stop();
+
+    default void honk() {
+        System.out.println("Honk honk!");
+    }
+}
+
+class Car implements Vehicle {
+    @Override
+    public void start() {
+        System.out.println("Car started");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Car stopped");
+    }
+
+}
+
+class Bike implements Vehicle {
+    @Override
+    public void start() {
+        System.out.println("Bike started");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Bike stopped");
+    }
 }
