@@ -1,4 +1,4 @@
-name: Release Charts
+name: Release Charts and Update Containers
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  release:
+  release-and-update-containers:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,3 +23,6 @@ jobs:
         uses: helm/chart-releaser-action@v1.5.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Run Update Containers Workflow
+        uses: ./.github/actions/update-containers

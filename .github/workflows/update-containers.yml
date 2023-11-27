@@ -1,0 +1,31 @@
+name: Update Containers in GitOps
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  update-containers:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Update Docker Container Version
+        run: echo "::set-env name=DOCKER_TAG::$(date +'%Y%m%d%H%M%S')"
+
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t your-docker-repo/offline-configurator:${{ env.DOCKER_TAG }} ./path/to/offline-configurator
+          docker push your-docker-repo/offline-configurator:${{ env.DOCKER_TAG }}
+
+      - name: Helm Deployment
+        run: |
+          helm upgrade -i offline-configurator-release ./charts/offline-configurator-chart --set image.tag=${{ env.DOCKER_TAG }}
