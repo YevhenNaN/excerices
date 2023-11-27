@@ -10,7 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3  # Add this line to ensure the repository is checked out
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Configure Git
         run: |
@@ -23,5 +25,4 @@ jobs:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Run Update Containers Workflow
-        uses: |
-          ./.github/workflows/update-containers
+        uses: ./.github/workflows/update-containers
