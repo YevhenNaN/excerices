@@ -24,4 +24,4 @@ jobs:
 
       - name: Run Update Containers Workflow
         uses: |
-          ./github/workflows/update-containers
+          ./.github/workflows/update-containers
