@@ -23,4 +23,5 @@ jobs:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Run Update Containers Workflow
-        uses: /update-containers
+        uses: |
+          ./github/workflows/update-containers
