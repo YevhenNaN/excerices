@@ -23,13 +23,27 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class Demo1Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Demo1Application.class, args);
+        String a = "123";
+        String b = "122";
+        if (Objects.equals(a, b)) {
+            System.out.println("Equals as ");
+        }
+
+        int[] array = {1, 2, 3, 4, 2, 5, 6, 3, 1};
+
+        int[] resultArray = Arrays.stream(array)
+                .distinct()
+                .toArray();
+
         Car car = new Car();
         car.honk();
         SolutionForBattles solutionForBattles = new SolutionForBattles();
