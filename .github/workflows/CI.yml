@@ -36,7 +36,7 @@ jobs:
           # Clone the remote repository and change working directory
           git clone \
             --depth=1 \
-            --branch=main \
+            --branch=master \
             https://github.com/$REPOSITORY \
             $FOLDER
 
@@ -57,4 +57,4 @@ jobs:
             --body "" \
             --title "chore: update version to $LATEST_VERSION" \
             --head "$BRANCH_NAME" \
-            --base "main"
+            --base "master"
