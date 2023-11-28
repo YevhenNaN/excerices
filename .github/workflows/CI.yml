@@ -43,7 +43,7 @@ jobs:
           cd $FOLDER
 
           # Update the version in the file (replace with your logic)
-          sed -i "s/App-version: .*/App-version: $LATEST_VERSION/" your-file.yaml
+          sed -i "s/App-version: .*/App-version: $LATEST_VERSION/" values.yaml
 
           # Commit the changes
           git add .
