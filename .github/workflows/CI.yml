@@ -18,6 +18,7 @@ jobs:
           token: ${{ secrets.PAT_TOKEN }}
 
       - name: Set up Git
+        uses: actions/checkout@v2
         run: |
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
@@ -25,6 +26,7 @@ jobs:
           echo "https://github.com/YevhenZzz:${{ secrets.PAT_TOKEN }}" > .git/credentials
 
       - name: Increment version
+        uses: actions/checkout@v2
         run: |
           CURRENT_VERSION=$(grep 'App-version:' k8s/values/values | awk '{print $2}')
           IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
@@ -32,6 +34,7 @@ jobs:
           sed -i "s/App-version: $CURRENT_VERSION/App-version: $NEW_VERSION/" k8s/values/values
 
       - name: Commit changes
+        uses: actions/checkout@v2
         run: |
           git add k8s/values/values
           git commit -m "chore: increment App-version"
