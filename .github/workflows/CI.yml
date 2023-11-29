@@ -1,8 +1,6 @@
 name: Java CI with Maven and Update Containers
 
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
@@ -13,7 +11,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          repository: changing-value-demo
+          repository: YevhenZzz/changing-value-demo
           ref: master
           token: ${{ secrets.PAT_TOKEN }}
 
