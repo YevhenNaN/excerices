@@ -19,6 +19,8 @@ jobs:
 
       - name: Set up Git
         run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
           git config --global url."https://${{ secrets.PAT_TOKEN }}:x-oauth-basic@github.com".insteadOf ssh://git@github.com
           cat ~/.gitconfig   
 
