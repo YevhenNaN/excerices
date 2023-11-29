@@ -1,9 +1,10 @@
-name: Increment App-version on PR Merge
+name: Java CI with Maven and Update Containers
 
 on:
+  push:
+    branches: [ "master" ]
   pull_request:
-    types:
-      - closed
+    branches: [ "master" ]
 
 jobs:
   increment_version:
