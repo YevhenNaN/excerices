@@ -15,6 +15,7 @@ jobs:
         with:
           repository: YevhenZzz/changing-value-demo
           ref: master
+          token: ${{ secrets.PAT_TOKEN }}
 
       - name: Set up Git
         run: |
