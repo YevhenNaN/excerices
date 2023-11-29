@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          repository: YevhenZzz/changing-value-demo
+          repository: changing-value-demo
           ref: master
           token: ${{ secrets.PAT_TOKEN }}
 
