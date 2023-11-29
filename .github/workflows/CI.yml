@@ -26,13 +26,13 @@ jobs:
 
       - name: Increment version
         run: |
-          CURRENT_VERSION=$(grep 'App-version:' k8s/values/values | awk '{print $2}')
+          CURRENT_VERSION=$(grep 'App-version:' k8s/values/values.yaml | awk '{print $2}')
           IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
-          NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.${VERSION_PARTS[2] + 1}"
-          sed -i "s/App-version: $CURRENT_VERSION/App-version: $NEW_VERSION/" k8s/values/values
+          NEW_VERSION="$((VERSION_PARTS[0])).$((VERSION_PARTS[1])).$((VERSION_PARTS[2] + 1))"
+          sed -i "s/App-version: $CURRENT_VERSION/App-version: $NEW_VERSION/" k8s/values/values.yaml
 
       - name: Commit changes
         run: |
-          git add k8s/values/values
+          git add k8s/values/values.yaml
           git commit -m "chore: increment App-version"
           git push origin main
