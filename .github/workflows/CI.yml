@@ -19,16 +19,14 @@ jobs:
 
       - name: Set up Git
         run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
-          git config credential.helper "store --file=.git/credentials"
-          echo "https://github.com/YevhenZzz:${{ secrets.PAT_TOKEN }}" > .git/credentials
+          git config --global url."https://${{ secrets.PAT_TOKEN }}:x-oauth-basic@github.com".insteadOf ssh://git@github.com
+          cat ~/.gitconfig   
 
       - name: Increment version
         run: |
           CURRENT_VERSION=$(grep 'App-version:' k8s/values/values.yaml | awk '{print $2}')
           IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
-          NEW_VERSION="$((VERSION_PARTS[0])).$((VERSION_PARTS[1])).$((VERSION_PARTS[2] + 1))"
+          NEW_VERSION="$((VERSION_PARTS[0])).$((VERSION_PARTS[1])).$((VERSION_PARTS[2] + 1))" {{app_version}}
           sed -i "s/App-version: $CURRENT_VERSION/App-version: $NEW_VERSION/" k8s/values/values.yaml
 
       - name: Commit changes
