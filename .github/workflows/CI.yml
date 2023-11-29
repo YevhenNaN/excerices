@@ -37,4 +37,4 @@ jobs:
           git commit -m "chore: increment App-version"
           git push origin master
 #check 123
-#changed version of {{app}} from ... to ...
+#changed version of {{app}} from ... to ... 123
