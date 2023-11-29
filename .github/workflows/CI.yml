@@ -35,4 +35,4 @@ jobs:
         run: |
           git add k8s/values/values.yaml
           git commit -m "chore: increment App-version"
-          git push origin main
+          git push origin master
