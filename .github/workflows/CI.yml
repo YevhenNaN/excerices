@@ -34,5 +34,13 @@ jobs:
           git add k8s/values/values.yaml
           git commit -m "chore: increment App-version"
           git push origin master
+
+      - name: Get repository name
+        id: repo_info
+        run: echo "::set-output name=repo_name::$(basename $GITHUB_REPOSITORY)"
+
+      - name: Create PR
+        run: |
+          gh pr create --base master --head master --title "${{ steps.repo_info.outputs.repo_name }}: update version" --body "chore: increment App-version"
 #check 123
 #changed version of {{app}} from ... to ... 123 12111
