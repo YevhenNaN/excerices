@@ -7,6 +7,8 @@ on:
 jobs:
   increment_version:
     runs-on: ubuntu-latest
+    env:
+      APP_NAME: "ApiSetting"  # Replace with the default app name
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3.5.2
@@ -24,7 +26,7 @@ jobs:
 
       - name: Create a new branch
         run: |
-          git checkout -b feature-branch
+          git checkout -b "${{ env.APP_NAME }}-${{ env.NEW_VERSION }}-branch"
 
       - name: Increment version
         run: |
@@ -37,9 +39,9 @@ jobs:
         run: |
           git add k8s/values/values.yaml
           git commit -m "chore: increment App-version"
-          git push origin feature-branch
+          git push origin "${{ env.APP_NAME }}-${{ env.NEW_VERSION }}-branch"
 
       - name: Create pull request
-        run: gh pr create -B master -H feature-branch --title 'Merge feature-branch into master' --body 'Created by Github action'
+        run: gh pr create -B master -H "${{ env.APP_NAME }}-new-version-branch" --title "Merge ${{ env.APP_NAME }}-new-version-branch into master" --body 'Created by Github action'
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
