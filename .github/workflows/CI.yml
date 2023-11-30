@@ -1,8 +1,6 @@
 name: Java CI with Maven and Update Containers
 
 on:
-  pull_request:
-    branches: [ "master" ]
   push:
     branches: [ "master" ]
 
@@ -37,4 +35,4 @@ jobs:
           git commit -m "chore: increment App-version"
           git push origin master
 #check 123
-#changed version of {{app}} from ... to ... 123 1211
+#changed version of {{app}} from ... to ... 123 12111
