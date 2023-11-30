@@ -22,6 +22,10 @@ jobs:
           git config --global url."https://${{ secrets.PAT_TOKEN }}:x-oauth-basic@github.com".insteadOf ssh://git@github.com
           cat ~/.gitconfig   
 
+      - name: Create a new branch
+        run: |
+          git checkout -b feature-branch
+
       - name: Increment version
         run: |
           CURRENT_VERSION=$(grep 'App-version:' k8s/values/values.yaml | awk '{print $2}')
@@ -29,14 +33,13 @@ jobs:
           NEW_VERSION="$((VERSION_PARTS[0])).$((VERSION_PARTS[1])).$((VERSION_PARTS[2] + 1))"
           sed -i "s/App-version: $CURRENT_VERSION/App-version: $NEW_VERSION/" k8s/values/values.yaml
 
-      - name: Commit changes
+      - name: Commit and push changes
         run: |
           git add k8s/values/values.yaml
           git commit -m "chore: increment App-version"
-          git push origin master
+          git push origin feature-branch
 
       - name: Create pull request
-        run: gh pr create -B base_branch -H branch_to_merge --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
+        run: gh pr create -B master -H feature-branch --title 'Merge feature-branch into master' --body 'Created by Github action'
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-
