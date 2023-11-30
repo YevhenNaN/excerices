@@ -11,7 +11,6 @@ jobs:
       - name: Checkout repository
         env:
           APP_NAME: "bachend-setting"
-          K8S_VALUES_PATH: "k8s/values/values.yaml"
         uses: actions/checkout@v3.5.2
         with:
           repository: YevhenZzz/changing-value-demo
@@ -31,14 +30,14 @@ jobs:
 
       - name: Increment version
         run: |
-          CURRENT_VERSION=$(grep 'App-version:' "${{ env.K8S_VALUES_PATH }}" | awk '{print $2}')
+          CURRENT_VERSION=$(grep 'App-version:' k8s/values/values.yaml | awk '{print $2}')
           IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
           NEW_VERSION="$((VERSION_PARTS[0])).$((VERSION_PARTS[1])).$((VERSION_PARTS[2] + 1))"
-          sed -i "s/App-version: $CURRENT_VERSION/App-version: $NEW_VERSION/" "${{ env.K8S_VALUES_PATH }}"
+          sed -i "s/App-version: $CURRENT_VERSION/App-version: $NEW_VERSION/" k8s/values/values.yaml
 
       - name: Commit and push changes
         run: |
-          git add "${{ env.K8S_VALUES_PATH }}"
+          git add k8s/values/values.yaml
           git commit -m "chore: increment App-version"
           git push origin feature-branch
 
