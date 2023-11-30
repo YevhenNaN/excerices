@@ -35,17 +35,8 @@ jobs:
           git commit -m "chore: increment App-version"
           git push origin master
 
-      - name: Create Pull Request
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.PAT_TOKEN }}
-          script: |
-            const { data } = await github.pulls.create({
-              owner: 'YevhenZzz',
-              repo: 'changing-value-demo',
-              title: 'chore: update version',
-              head: 'master',
-              base: 'main',
-              body: 'Automated pull request to update version.',
-            });
-            console.log(`Pull request created: ${data.html_url}`);
+      - name: Create pull request
+        run: gh pr create -B base_branch -H branch_to_merge --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+
