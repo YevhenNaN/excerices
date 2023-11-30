@@ -40,6 +40,8 @@ jobs:
         run: echo "::set-output name=repo_name::$(basename $GITHUB_REPOSITORY)"
 
       - name: Create PR
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           gh pr create --base master --head master --title "${{ steps.repo_info.outputs.repo_name }}: update version" --body "chore: increment App-version"
 #check 123
