@@ -35,14 +35,17 @@ jobs:
           git commit -m "chore: increment App-version"
           git push origin master
 
-      - name: Get repository name
-        id: repo_info
-        run: echo "::set-output name=repo_name::$(basename $GITHUB_REPOSITORY)"
-
-      - name: Create PR
-        env:
-          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
-        run: |
-          gh pr create --base master --head master --title "${{ steps.repo_info.outputs.repo_name }}: update version" --body "chore: increment App-version"
-#check 123
-#changed version of {{app}} from ... to ... 123 12111
+      - name: Create Pull Request
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.PAT_TOKEN }}
+          script: |
+            const { data } = await github.pulls.create({
+              owner: 'YevhenZzz',
+              repo: 'changing-value-demo',
+              title: 'chore: update version',
+              head: 'master',
+              base: 'main',
+              body: 'Automated pull request to update version.',
+            });
+            console.log(`Pull request created: ${data.html_url}`);
