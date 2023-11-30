@@ -31,14 +31,14 @@ jobs:
 
       - name: Increment version
         run: |
-          CURRENT_VERSION=$(grep 'App-version:' ${{ env.K8S_VALUES_PATH }} | awk '{print $2}')
+          CURRENT_VERSION=$(grep 'App-version:' "${{ env.K8S_VALUES_PATH }}" | awk '{print $2}')
           IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
           NEW_VERSION="$((VERSION_PARTS[0])).$((VERSION_PARTS[1])).$((VERSION_PARTS[2] + 1))"
-          sed -i "s/App-version: $CURRENT_VERSION/App-version: $NEW_VERSION/" ${{ env.K8S_VALUES_PATH }}
+          sed -i "s/App-version: $CURRENT_VERSION/App-version: $NEW_VERSION/" "${{ env.K8S_VALUES_PATH }}"
 
       - name: Commit and push changes
         run: |
-          git add ${{ env.K8S_VALUES_PATH }}
+          git add "${{ env.K8S_VALUES_PATH }}"
           git commit -m "chore: increment App-version"
           git push origin feature-branch
 
