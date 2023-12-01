@@ -9,8 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        env:
-          APP_NAME: backendSetting
         uses: actions/checkout@v3.5.2
         with:
           repository: YevhenZzz/changing-value-demo
@@ -25,6 +23,8 @@ jobs:
           cat ~/.gitconfig   
 
       - name: Create a new branch
+        env:
+          APP_NAME: backendSetting
         run: |
           git checkout -b "${{ env.APP_NAME }}_1.0.0"
 
@@ -38,11 +38,11 @@ jobs:
         run: |
           git add k8s/charts/offline-configurator/values-dev.yaml
           git commit -m "Change api version from $CURRENT_VERSION to $NEW_VERSION"
-          git push origin "${{ env.APP_NAME }}-${{ steps.versioning.outputs.version }}"
+          git push origin "${{ env.APP_NAME }}_1.0.0"
 
       - name: Create pull request
         run: |
-          gh pr create -B main -H "${{ env.APP_NAME }}-${{ steps.versioning.outputs.version }}" 
+          gh pr create -B main -H "${{ env.APP_NAME }}_1.0.0" 
           --title 'Update api version'
           --body 'Created by Github action'
         env:
