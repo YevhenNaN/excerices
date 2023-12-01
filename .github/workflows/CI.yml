@@ -31,7 +31,7 @@ jobs:
       - name: Increment version
         run: |
           CURRENT_VERSION=$(grep 'apiVersion:' k8s/charts/offline-configurator/values-dev.yaml | awk '{print $2}')
-          NEW_VERSION=${{ steps.versioning.outputs.version }}
+          NEW_VERSION=1.1.1
           sed -i "s/apiVersion: $CURRENT_VERSION/apiVersion: $NEW_VERSION/" k8s/charts/offline-configurator/values-dev.yaml
 
       - name: Commit and push changes
