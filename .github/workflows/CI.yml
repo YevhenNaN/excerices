@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Checkout repository
         env:
-          APP_NAME: backend-setting
+          APP_NAME: backendSetting
         uses: actions/checkout@v3.5.2
         with:
           repository: YevhenZzz/changing-value-demo
