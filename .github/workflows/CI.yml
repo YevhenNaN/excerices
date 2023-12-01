@@ -26,22 +26,25 @@ jobs:
 
       - name: Create a new branch
         run: |
-          git checkout -b feature-branch
+          git checkout -b "${{ env.APP_NAME }}-${{ steps.versioning.outputs.version }}"
 
       - name: Increment version
         run: |
-          CURRENT_VERSION=$(grep 'App-version:' k8s/values/values.yaml | awk '{print $2}')
-          IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
-          NEW_VERSION="$((VERSION_PARTS[0])).$((VERSION_PARTS[1])).$((VERSION_PARTS[2] + 1))"
-          sed -i "s/App-version: $CURRENT_VERSION/App-version: $NEW_VERSION/" k8s/values/values.yaml
+          CURRENT_VERSION=$(grep 'apiVersion:' k8s/charts/offline-configurator/values-dev.yaml | awk '{print $2}')
+          NEW_VERSION=${{ steps.versioning.outputs.version }}
+          sed -i "s/apiVersion: $CURRENT_VERSION/apiVersion: $NEW_VERSION/" k8s/charts/offline-configurator/values-dev.yaml
 
       - name: Commit and push changes
         run: |
-          git add k8s/values/values.yaml
-          git commit -m "chore: increment App-version"
-          git push origin feature-branch
+          git add k8s/charts/offline-configurator/values-dev.yaml
+          git commit -m "Change api version from $CURRENT_VERSION to $NEW_VERSION"
+          git push origin "${{ env.APP_NAME }}-${{ steps.versioning.outputs.version }}"
 
       - name: Create pull request
-        run: gh pr create -B master -H feature-branch --title 'Merge feature-branch into master' --body 'Created by Github action'
+        run: |
+          gh pr create -B main -H "${{ env.APP_NAME }}-${{ steps.versioning.outputs.version }}" 
+          --title 'Update api version'
+          --body 'Created by Github action'
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+#sadasd
