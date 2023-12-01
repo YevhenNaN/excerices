@@ -45,4 +45,4 @@ jobs:
           gh pr create -B main -H "${{ env.APP_NAME }}_1.0.0" --title 'Update api version' --body 'Created by Github action'
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-#sadasd
+#sadasd1
