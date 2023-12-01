@@ -42,7 +42,7 @@ jobs:
 
       - name: Create pull request
         run: |
-          gh pr create -B main -H "${{ env.APP_NAME }}_1.0.0" --title 'Update api version' --body 'Created by Github action'
+          gh pr create -B master -H "${{ env.APP_NAME }}_1.0.0" --title 'Update api version' --body 'Created by Github action'
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 #sadasd1
