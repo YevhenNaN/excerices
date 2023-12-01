@@ -2,7 +2,7 @@ name: Java CI with Maven and Update Containers
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ create-pr ]
 
 jobs:
   increment_version:
@@ -12,6 +12,16 @@ jobs:
       NEW_VERSION: 1.5.5
       K8S_PATH_VALUE: k8s/charts/offline-configurator/values-dev.yaml
     steps:
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+
       - name: Checkout repository
         uses: actions/checkout@v3.5.2
         with:
@@ -42,6 +52,6 @@ jobs:
       - name: Create pull request
         run: |
           gh pr create -B master -H "${{ env.APP_NAME }}_1.0.0" --title 'Update api version' --body 'Created by Github action'
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 #sadasd1
