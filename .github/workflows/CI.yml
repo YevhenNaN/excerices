@@ -7,6 +7,8 @@ on:
 jobs:
   increment_version:
     runs-on: ubuntu-latest
+    env:
+      APP_NAME: backendSetting
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3.5.2
@@ -23,29 +25,26 @@ jobs:
           cat ~/.gitconfig   
 
       - name: Create a new branch
-        env:
-          APP_NAME: backendSetting
         run: |
           git checkout -b "${{ env.APP_NAME }}_1.0.0"
 
-#      - name: Increment version
-#        run: |
+      - name: Increment version
+        run: |
           CURRENT_VERSION=$(grep 'apiVersion:' k8s/charts/offline-configurator/values-dev.yaml | awk '{print $2}')
-          NEW_VERSION=1.0.1
-          sed -i "s/apiVersion:
-            $CURRENT_VERSION/apiVersion: $NEW_VERSION/" k8s/charts/offline-configurator/values-dev.yaml
+          NEW_VERSION=${{ steps.versioning.outputs.version }}
+          sed -i "s/apiVersion: $CURRENT_VERSION/apiVersion: $NEW_VERSION/" k8s/charts/offline-configurator/values-dev.yaml
 
-#      - name: Commit and push changes
-#        run: |
+      - name: Commit and push changes
+        run: |
           git add k8s/charts/offline-configurator/values-dev.yaml
           git commit -m "Change api version from $CURRENT_VERSION to $NEW_VERSION"
           git push origin "${{ env.APP_NAME }}_1.0.0"
 
-#      - name: Create pull request
-#        run: |
+      - name: Create pull request
+        run: |
           gh pr create -B main -H "${{ env.APP_NAME }}_1.0.0" 
           --title 'Update api version'
           --body 'Created by Github action'
-          env:
-            GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 #sadasd
