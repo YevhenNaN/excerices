@@ -26,7 +26,7 @@ jobs:
 
       - name: Create a new branch
         run: |
-          git checkout -b "${{ env.APP_NAME }}-${{ steps.versioning.outputs.version }}"
+          git checkout -b "${{ env.APP_NAME }}-1.0.0"
 
       - name: Increment version
         run: |
