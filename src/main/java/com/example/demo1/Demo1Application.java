@@ -176,7 +176,7 @@ class Car implements Vehicle {
 
     @Override
     public void stop() {
-        System.out.println("Car stopped...");
+        System.out.println("Car stopped..");
     }
 
 }
