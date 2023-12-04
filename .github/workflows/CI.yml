@@ -3,6 +3,8 @@ name: Java CI with Maven and Update Containers
 on:
   push:
     branches: [ "master" ]
+    paths-ignore:
+      [ -'**/.github' ]
 
 jobs:
   increment_version:
