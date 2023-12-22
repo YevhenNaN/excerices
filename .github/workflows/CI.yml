@@ -2,9 +2,7 @@ name: Java CI with Maven and Update Containers
 
 on:
   push:
-    branches: [ "master" ]
-    paths-ignore:
-      - '**/.github/**'
+    branches: [ master ]
 
 jobs:
   increment_version:
@@ -36,9 +34,10 @@ jobs:
         run: |
           CURRENT_VERSION=$(grep 'apiVersion:' ${{ env.K8S_PATH_VALUE }} | awk '{print $2}')
           NEW_VERSION=${{ env.NEW_VERSION }}
+          ENVIRONMENT=$(echo ${{ inputs.k8s_path_value }} | awk -F'/' '{print $NF}' | awk -F'-' '{print $2}')
           sed -i "s/apiVersion: $CURRENT_VERSION/apiVersion: $NEW_VERSION/" ${{ env.K8S_PATH_VALUE }}
           git add ${{ env.K8S_PATH_VALUE }}
-          git commit -m "Change api version from $CURRENT_VERSION to $NEW_VERSION"
+          git commit -m "Update $ENVIRONMENT api version from $CURRENT_VERSION to $NEW_VERSION"
           git push origin "${{ env.APP_NAME }}_1.0.0"
 
       - name: Create pull request
