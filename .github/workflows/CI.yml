@@ -43,7 +43,7 @@ jobs:
       - name: Create pull request
         run: |
           ENVIRONMENT=$(echo ${{ env.K8S_PATH_VALUE }} | awk -F'/' '{print $NF}' | awk -F'-' '{print $2}' | awk -F'.' '{print $1}')
-          gh pr create -B master -H "${{ env.APP_NAME }}_1.0.0" --title 'Update api version on $$ENVIRONMENT environment' --body 'Created by Github action'
+          gh pr create -B master -H "${{ env.APP_NAME }}_1.0.0" --title 'Update api version on $ENVIRONMENT environment' --body 'Created by Github action'
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 # changes123
