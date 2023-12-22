@@ -35,7 +35,8 @@ jobs:
         run: |
           CURRENT_VERSION=$(grep 'apiVersion:' ${{ env.K8S_PATH_VALUE }} | awk '{print $2}')
           NEW_VERSION=${{ env.NEW_VERSION }}
-          echo ENVIRONMENT=$(echo ${{ env.K8S_PATH_VALUE }} | awk -F'/' '{print $NF}' | awk -F'-' '{print $2}' | awk -F'.' '{print $1}')
+          ENVIRONMENT=$(echo ${{ env.K8S_PATH_VALUE }} | awk -F'/' '{print $NF}' | awk -F'-' '{print $2}' | awk -F'.' '{print $1}')
+          echo "ENVIRONMENT=$ENVIRONMENT" >> $GITHUB_ENV
           sed -i "s/apiVersion: $CURRENT_VERSION/apiVersion: $NEW_VERSION/" ${{ env.K8S_PATH_VALUE }}
           git add ${{ env.K8S_PATH_VALUE }}
           git commit -m "Update api version on $ENVIRONMENT environment from $CURRENT_VERSION to $NEW_VERSION"
@@ -43,8 +44,7 @@ jobs:
 
       - name: Create pull request
         run: |
-          
-          gh pr create -B master -H "${{ env.APP_NAME }}_1.0.0" --title 'Update api version on ${{ steps.version-incrementor.outputs.ENVIRONMENT }}" environment' --body 'Created by Github action'
+          gh pr create -B master -H "${{ env.APP_NAME }}_1.0.0" --title 'Update api version on $ENVIRONMENT environment' --body 'Created by Github action'
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 # changes123
