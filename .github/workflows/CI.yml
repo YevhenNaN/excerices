@@ -40,11 +40,11 @@ jobs:
           sed -i "s/apiVersion: $CURRENT_VERSION/apiVersion: $NEW_VERSION/" ${{ env.K8S_PATH_VALUE }}
           git add ${{ env.K8S_PATH_VALUE }}
           git commit -m "Update api version on $ENVIRONMENT_NAME environment from $CURRENT_VERSION to $NEW_VERSION"
-          git push origin "${{ env.APP_NAME }}_1.0.0"
+          git push origin "${{ env.APP_NAME }}_1.0.0.1"
 
       - name: Create pull request
         run: |
-          gh pr create -B master -H "${{ env.APP_NAME }}_1.0.0" --title "Update api version on $ENVIRONMENT_NAME environment" --body "Created by Github action."
+          gh pr create -B master -H "${{ env.APP_NAME }}_1.0.0.1" --title "Update api version on $ENVIRONMENT_NAME environment" --body "Created by Github action."
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           ENVIRONMENT_NAME: ${{ env.ENVIRONMENT_NAME }}
