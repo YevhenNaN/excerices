@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       APP_NAME: backendSetting
-      NEW_VERSION: 1.5.5
+      NEW_VERSION: 1.5.6
       K8S_PATH_VALUE: k8s/charts/offline-configurator/values-dev.yaml
     steps:
       - name: Checkout repository
@@ -44,7 +44,7 @@ jobs:
 
       - name: Create pull request
         run: |
-          gh pr create -B master -H "${{ env.APP_NAME }}_1.0.0" --title 'Update api version on $ENVIRONMENT_NAME environment' --body "Created by Github action."
+          gh pr create -B master -H "${{ env.APP_NAME }}_1.0.0" --title "Update api version on $ENVIRONMENT_NAME environment" --body "Created by Github action."
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           ENVIRONMENT_NAME: ${{ env.ENVIRONMENT_NAME }}
