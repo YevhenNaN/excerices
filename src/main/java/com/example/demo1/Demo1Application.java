@@ -9,77 +9,21 @@ import com.example.demo1.patterns.gof.creational.factory_method.MotorVehicleFact
 import com.example.demo1.patterns.gof.creational.prototype.Employees;
 import com.example.demo1.patterns.gof.creational.singleton.ClassSingleton;
 import com.example.demo1.patterns.gof.creational.singleton.EnumSingleton;
-import com.example.demo1.patterns.gof.structural.adapter.RoundHole;
-import com.example.demo1.patterns.gof.structural.adapter.RoundPeg;
-import com.example.demo1.patterns.gof.structural.adapter.SquarePeg;
-import com.example.demo1.patterns.gof.structural.adapter.SquarePegAdapter;
 import com.example.demo1.patterns.gof.structural.adapter.charger.SocketAdapter;
 import com.example.demo1.patterns.gof.structural.adapter.charger.SocketClassAdapterImpl;
 import com.example.demo1.patterns.gof.structural.adapter.charger.SocketObjectAdapterImpl;
 import com.example.demo1.patterns.gof.structural.adapter.charger.Volt;
-import com.example.demo1.services.StreamOperationsService;
-import com.example.demo1.solutionW3Resource.codin_game_exercises.SolutionForBattles;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class Demo1Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Demo1Application.class, args);
-        String a = "123";
-        String b = "122";
-        if (Objects.equals(a, b)) {
-            System.out.println("Equals as ");
-        }
-
-        int[] array = {1, 2, 3, 4, 2, 5, 6, 3, 1};
-
-        int[] resultArray = Arrays.stream(array)
-                .distinct()
-                .toArray();
-
-        Car car = new Car();
-        car.honk();
-        SolutionForBattles solutionForBattles = new SolutionForBattles();
-        boolean anagram = solutionForBattles.isAnagram("anagram", "nagaram");
-        System.out.println(anagram);
-        System.out.println(SolutionForBattles.firstCharToTitleCase("ITS A LONG DAY WTD "));
-
-
-        StreamOperationsService streamOperationsService = new StreamOperationsService();
-        streamOperationsService.performStreamOperations();
-        creationPatternExamples();
-
-        // Adapter
-        // Round fits round, no surprise.
-        RoundHole hole = new RoundHole(5);
-        RoundPeg rpeg = new RoundPeg(5);
-        if (hole.fits(rpeg)) {
-            System.out.println("Round peg r5 fits round hole r5.");
-        }
-
-        SquarePeg smallSqPeg = new SquarePeg(2);
-        SquarePeg largeSqPeg = new SquarePeg(20);
-        // hole.fits(smallSqPeg); // Won't compile.
-
-        // Adapter solves the problem.
-        SquarePegAdapter smallSqPegAdapter = new SquarePegAdapter(smallSqPeg);
-        SquarePegAdapter largeSqPegAdapter = new SquarePegAdapter(largeSqPeg);
-        if (hole.fits(smallSqPegAdapter)) {
-            System.out.println("Square peg w2 fits round hole r5.");
-        }
-        if (!hole.fits(largeSqPegAdapter)) {
-            System.out.println("Square peg w20 does not fit into round hole r5.");
-        }
-
-        testClassAdapter();
-        testObjectAdapter();
     }
 
     private static void creationPatternExamples() {
