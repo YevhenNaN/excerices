@@ -26,13 +26,9 @@ jobs:
           git config --global url."https://${{ secrets.PAT_TOKEN }}:x-oauth-basic@github.com".insteadOf ssh://git@github.com
           cat ~/.gitconfig   
 
-      - name: Pull changes from the remote repository
-        run: git pull origin master
-        continue-on-error: true
-
       - name: Create a new branch
         run: |
-          git checkout -b "${{ env.APP_NAME }}_1.0.0"
+          git checkout -b "${{ env.APP_NAME }}_1.0.0.1"
 
       - name: Increment version
         id: version-incrementor
