@@ -45,7 +45,7 @@ jobs:
       - name: Create pull request
         run: |
           gh pr create -B master -H "${{ env.APP_NAME }}_1.0.0.2" --title "Update api version on $ENVIRONMENT_NAME environment" --body "Created by Github action."
-        with:
+        env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           ENVIRONMENT_NAME: ${{ env.ENVIRONMENT_NAME }}
 # changes1231111212111
