@@ -33,15 +33,15 @@ jobs:
           ENVIRONMENT_NAME=$(echo ${{ env.K8S_PATH_VALUE }} | awk -F'/' '{print $NF}' | awk -F'-' '{print $2}' | awk -F'.' '{print $1}')
           echo "ENVIRONMENT_NAME=$ENVIRONMENT_NAME" >> $GITHUB_ENV
           
-          git checkout -b "${{ env.APP_NAME }}-$ENVIRONMENT_NAME-3"
+          git checkout -b "${{ env.APP_NAME }}-$ENVIRONMENT_NAME-4"
           sed -i "s/apiVersion: $CURRENT_VERSION/apiVersion: $NEW_VERSION/" ${{ env.K8S_PATH_VALUE }}
           git add ${{ env.K8S_PATH_VALUE }}
           git commit -m "Update api version on $ENVIRONMENT_NAME environment from $CURRENT_VERSION to $NEW_VERSION"
-          git push origin "${{ env.APP_NAME }}-$ENVIRONMENT_NAME-3"
+          git push origin "${{ env.APP_NAME }}-$ENVIRONMENT_NAME-4"
 
       - name: Create pull request
         run: |
-          gh pr create -B master -H "${{ env.APP_NAME }}-$ENVIRONMENT_NAME-3" --title "Update api version on $ENVIRONMENT_NAME environment" --body "Created by Github action."
+          gh pr create -B master -H "${{ env.APP_NAME }}-$ENVIRONMENT_NAME-4" --title "Update api version on $ENVIRONMENT_NAME environment" --body "Created by Github action."
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 # changes12311112121111
