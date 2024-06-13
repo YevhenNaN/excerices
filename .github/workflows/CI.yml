@@ -28,14 +28,14 @@ jobs:
 
       - name: Increment version in new branch
         run: |
-          NEW_VERSION=${{ inputs.new_version }}
-          APP_NAME=${{ inputs.app_name }}
-          YAML_FILE=${{ inputs.K8S_PATH_VALUE }}
-        
+          APP_NAME=${{ env.APP_NAME }}
+          NEW_VERSION=${{ env.NEW_VERSION }}
+          YAML_FILE=${{ env.K8S_PATH_VALUE }}
+          
           if grep -q "${APP_NAME}:" ${YAML_FILE}; then
             # Update the version for the specific service
-            sed -i "/${APP_NAME}:/{N;s/version: [^ ]*/version: $NEW_VERSION/}" ${YAML_FILE}
-        
+            sed -i "/${APP_NAME}:/,/version:/{s/version: .*/version: $NEW_VERSION/}" ${YAML_FILE}
+          
             git add ${YAML_FILE}
             git commit -m "Update ${APP_NAME} version to ${NEW_VERSION}"
             git push origin focalpoint_3.0
