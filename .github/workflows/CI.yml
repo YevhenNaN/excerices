@@ -44,3 +44,4 @@ jobs:
           gh pr create -B master -H "${{ env.APP_NAME }}-$ENVIRONMENT_NAME-4" --title "Update api version on $ENVIRONMENT_NAME environment" --body "Created by Github action."
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+# sadas
