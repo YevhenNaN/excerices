@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       APP_NAME: synergy-settings-api
-      NEW_VERSION: 4.1.3
+      NEW_VERSION: 4.1.33
       K8S_PATH_VALUE: 3.0/values.yaml
     steps:
       - name: Checkout repository
