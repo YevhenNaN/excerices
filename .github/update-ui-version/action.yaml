@@ -1,0 +1,61 @@
+name: "Increment Version"
+description: "Increments the version in a specified Kubernetes manifest file and pushes the changes to a branch."
+
+inputs:
+  app_name:
+    description: "Name of the application"
+    required: true
+  new_version:
+    description: "New version to set in the manifest"
+    required: true
+  k8s_path_value:
+    description: "Path to Kubernetes manifest file"
+    required: true
+  branch:
+    description: "Branch to push changes to"
+    required: true
+  repository:
+    description: "GitHub repository in the format owner/repo"
+    required: true
+  token:
+    description: "GitHub token for authentication"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3.5.2
+      with:
+        repository: ${{ inputs.repository }}
+        ref: ${{ inputs.branch }}
+        token: ${{ inputs.token }}
+
+    - name: Set up Git
+      shell: bash
+      run: |
+        git config user.email "actions@github.com"
+        git config user.name "GitHub Actions"
+        git config --global url."https://${{ inputs.token }}:x-oauth-basic@github.com".insteadOf ssh://git@github.com
+
+    - name: Update version
+      shell: bash
+      run: |
+        APP_NAME=${{ inputs.app_name }}
+        NEW_VERSION=${{ inputs.new_version }}
+        YAML_FILE=${{ inputs.k8s_path_value }}
+        BRANCH=${{ inputs.fp_helm_charts_branch }}
+
+        if grep -q "${APP_NAME}:" ${YAML_FILE}; then
+          sed -i "/${APP_NAME}:/,/version:/{s/version: .*/version: $NEW_VERSION/}" ${YAML_FILE}
+          git add ${YAML_FILE}
+          git commit -m "Update ${APP_NAME} version to ${NEW_VERSION}"
+          git push origin ${BRANCH}
+        else
+          echo "Error: Service ${APP_NAME} not found in ${YAML_FILE}"
+          exit 1
+        fi
+
+    - name: Checkout repository
+      uses: actions/checkout@v3.5.2
+#added file
