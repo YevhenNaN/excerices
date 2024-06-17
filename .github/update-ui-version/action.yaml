@@ -46,7 +46,8 @@ runs:
         NEW_VERSION=${{ inputs.new_version }}
         YAML_FILE=${{ inputs.k8s_path_value }}
         BRANCH=${{ inputs.fp_helm_charts_branch }}
-
+        
+        git checkout focalpoint_3.0
         if grep -q "${APP_NAME}:" ${YAML_FILE}; then
           sed -i "/${APP_NAME}:/,/version:/{s/version: .*/version: $NEW_VERSION/}" ${YAML_FILE}
           git add ${YAML_FILE}

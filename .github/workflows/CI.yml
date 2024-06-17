@@ -15,8 +15,8 @@ jobs:
         uses: ./.github/update-ui-version
         with:
           app_name: synergy-settings-ui
-          new_version: 4.1.51
+          new_version: 4.22
           k8s_path_value: 3.0/values.yaml
-          branch: focalpoint_3.0
+          branch: master
           repository: YevhenZzz/changing-value-demo
           token: ${{ secrets.PAT_TOKEN }}
