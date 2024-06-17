@@ -1,0 +1,37 @@
+name: Update UI version
+
+on:
+  workflow_dispatch:
+    inputs:
+      app_name:
+        description: 'Name of the application'
+        required: true
+      k8s_path_value:
+        description: 'Path to Kubernetes manifest file'
+        required: true
+      new_version:
+        description: 'New version to set in the manifest'
+        required: true
+      fp_helm_charts_branch:
+        description: 'Branch or tag name to checkout'
+        required: true
+      fp_helm_charts_repository:
+        description: 'GitHub repository in the format owner/repo'
+        required: true
+
+jobs:
+  update_version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3.5.2
+
+      - name: Update UI Version on environment
+        uses: ./.github/actions/update-ui-version
+        with:
+          app_name: ${{ github.event.inputs.app_name }}
+          k8s_path_value: ${{ github.event.inputs.k8s_path_value }}
+          new_version: ${{ github.event.inputs.new_version }}
+          fp_helm_charts_branch: ${{ github.event.inputs.fp_helm_charts_branch  }}
+          fp_helm_charts_repository: ${{ github.event.inputs.fp_helm_charts_repository }}
+          access_token: ${{ secrets.FP_TOKEN }}
