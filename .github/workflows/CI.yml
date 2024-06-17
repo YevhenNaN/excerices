@@ -17,6 +17,6 @@ jobs:
           app_name: synergy-settings-ui
           new_version: 4.22
           k8s_path_value: 3.0/values.yaml
-          branch: master
+          branch: focalpoint_3.0
           repository: YevhenZzz/changing-value-demo
           token: ${{ secrets.PAT_TOKEN }}
