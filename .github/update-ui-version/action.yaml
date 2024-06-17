@@ -37,6 +37,7 @@ runs:
         git config user.email "actions@github.com"
         git config user.name "GitHub Actions"
         git config --global url."https://${{ inputs.token }}:x-oauth-basic@github.com".insteadOf ssh://git@github.com
+        cat ~/.gitconfig
 
     - name: Update version
       shell: bash
@@ -45,7 +46,8 @@ runs:
         NEW_VERSION=${{ inputs.new_version }}
         YAML_FILE=${{ inputs.k8s_path_value }}
         BRANCH=${{ inputs.branch }}
-
+        
+        cd 3.0
         if [ -f "${YAML_FILE}" ]; then
           echo "File ${YAML_FILE} exists."
           echo "Contents of ${YAML_FILE}:"
