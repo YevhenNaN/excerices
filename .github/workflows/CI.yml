@@ -8,6 +8,10 @@ jobs:
   increment_version:
     runs-on: ubuntu-latest
     steps:
+      -
+      - name: Checkout repository
+        uses: actions/checkout@v3.5.2
+
       - name: Increment version in new branch
         uses: ./.github/actions/update-ui-version
         with:
