@@ -34,4 +34,4 @@ jobs:
           new_version: ${{ github.event.inputs.new_version }}
           branch: ${{ github.event.inputs.fp_helm_charts_branch  }}
           repository: ${{ github.event.inputs.fp_helm_charts_repository }}
-          token: ${{ secrets.FP_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
