@@ -47,6 +47,7 @@ runs:
         YAML_FILE=${{ inputs.k8s_path_value }}
         BRANCH=${{ inputs.fp_helm_charts_branch }}
         
+        git fetch origin focalpoint_3.0
         git checkout focalpoint_3.0
         if grep -q "${APP_NAME}:" ${YAML_FILE}; then
           sed -i "/${APP_NAME}:/,/version:/{s/version: .*/version: $NEW_VERSION/}" ${YAML_FILE}
