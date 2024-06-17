@@ -47,24 +47,15 @@ runs:
         YAML_FILE=${{ inputs.k8s_path_value }}
         BRANCH=${{ inputs.fp_helm_charts_branch }}
         
-        if [ -f "${YAML_FILE}" ]; then
-          echo "File ${YAML_FILE} exists."
-          echo "Contents of ${YAML_FILE}:"
-          cat "${YAML_FILE}"
-    
-          if grep -q "${APP_NAME}:" ${YAML_FILE}; then
-            sed -i "/${APP_NAME}:/,/version:/{s/version: .*/version: $NEW_VERSION/}" ${YAML_FILE}
-            git add ${YAML_FILE}
-            git commit -m "Update ${APP_NAME} version to ${NEW_VERSION}"
-            git push origin ${BRANCH}
-          else
-            echo "Error: Service ${APP_NAME} not found in ${YAML_FILE}"
-            exit 1
-          fi
+        if grep -q "${APP_NAME}:" ${YAML_FILE}; then
+          sed -i "/${APP_NAME}:/,/version:/{s/version: .*/version: $NEW_VERSION/}" ${YAML_FILE}
+          git add ${YAML_FILE}
+          git commit -m "Update ${APP_NAME} version to ${NEW_VERSION}"
+          git push origin ${BRANCH}
         else
-          echo "File ${YAML_FILE} does not exist. Please check the path."
+          echo "Error: Service ${APP_NAME} not found in ${YAML_FILE}"
           exit 1
-          fi
+        fi
 
     - name: Checkout repository
       uses: actions/checkout@v3.5.2
