@@ -48,22 +48,13 @@ runs:
         BRANCH=${{ inputs.branch }}
         
         cd 3.0
-        if [ -f values.yaml ]; then
-          echo "File values.yaml exists."
-          echo "Contents of values.yaml:"
-          cat "values.yaml"
-    
-          if grep -q "${APP_NAME}:" values.yaml; then
-            sed -i "/${APP_NAME}:/,/version:/{s/version: .*/version: $NEW_VERSION/}" values.yaml
-            git add values.yaml
-            git commit -m "Update ${APP_NAME} version to ${NEW_VERSION}"
-            git push origin ${BRANCH}
-          else
-            echo "Error: Service ${APP_NAME} not found in values.yaml"
-            exit 1
-          fi
+        if grep -q "${APP_NAME}:" values.yaml; then
+          sed -i "/${APP_NAME}:/,/version:/{s/version: .*/version: $NEW_VERSION/}" values.yaml
+          git add values.yaml
+          git commit -m "Update ${APP_NAME} version to ${NEW_VERSION}"
+          git push origin ${BRANCH}
         else
-          echo "File values.yaml does not exist. Please check the path."
+          echo "Error: Service ${APP_NAME} not found in values.yaml"
           exit 1
         fi
 
