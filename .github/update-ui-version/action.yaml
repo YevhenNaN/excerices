@@ -44,17 +44,19 @@ runs:
       run: |
         APP_NAME=${{ inputs.app_name }}
         NEW_VERSION=${{ inputs.new_version }}
-        YAML_FILE=${{ inputs.k8s_path_value }}
-        BRANCH=${{ inputs.branch }}
+        PATH_VALUE=${{ inputs.k8s_path_value }}
+        BRANCH=${{ inputs.fp_helm_charts_branch }}
+        DIR_NAME=$(dirname "${PATH_VALUE}")
+        FILE_NAME=$(basename "${PATH_VALUE}")
         
-        cd 3.0
-        if grep -q "${APP_NAME}:" values.yaml; then
-          sed -i "/${APP_NAME}:/,/version:/{s/version: .*/version: $NEW_VERSION/}" values.yaml
-          git add values.yaml
+        cd ${DIR_NAME}
+        if grep -q "${APP_NAME}:" ${FILE_NAME}; then
+          sed -i "/${APP_NAME}:/,/version:/{s/version: .*/version: $NEW_VERSION/}" ${FILE_NAME}
+          git add ${FILE_NAME}
           git commit -m "Update ${APP_NAME} version to ${NEW_VERSION}"
           git push origin ${BRANCH}
         else
-          echo "Error: Service ${APP_NAME} not found in values.yaml"
+          echo "Error: Service ${APP_NAME} not found in ${FILE_NAME}"
           exit 1
         fi
 
