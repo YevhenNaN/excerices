@@ -14,9 +14,9 @@ jobs:
       - name: Increment version in new branch
         uses: ./.github/update-ui-version
         with:
-          app_name: synergy-settings-ui
+          app_name: test-settings-ui
           new_version: 4.3123
           k8s_path_value: ${{ vars.K8S_PATH_VALUE }}
-          branch: focalpoint_3.0
+          branch: test-branch_3.0
           repository: YevhenZzz/changing-value-demo
           token: ${{ secrets.PAT_TOKEN }}
