@@ -9,10 +9,12 @@ public class Student {
     public static final String id = "my_id";
 
     public static void error(String message) {
-        if (System.getenv(id) != null)
+        if (System.getenv(id) != null) {
             logger.error(String.format("%s, %s=%s", message, id, System.getenv(id)));
-        else
+        }
+        else {
             logger.error(message);
+        }
     }
 
     public int searchInsert(int[] nums, int target) {
