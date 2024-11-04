@@ -12,6 +12,7 @@ public class Student {
         if (System.getenv(id) != null) {
             logger.error(String.format("%s, %s=%s", message, id, System.getenv(id)));
         }
+        System.out.println("sadaa");
         else {
             logger.error(message);
         }
