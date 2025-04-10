@@ -1,5 +1,7 @@
 package com.example.demo1;
 
+import com.example.demo1.model.Employee;
+import com.example.demo1.model.Product;
 import com.example.demo1.patterns.gof.creational.abstract_factory.AnimalAbstractFactory;
 import com.example.demo1.patterns.gof.creational.abstract_factory.AnimalEra;
 import com.example.demo1.patterns.gof.creational.abstract_factory.AnimalType;
@@ -17,12 +19,17 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static com.example.demo1.model.Employee.getHighEarners;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class Demo1Application {
 
     public static void main(String[] args) {
+        System.out.println(getHighEarners(Employee.getMockEmployees()));
+//        System.out.println(getMostExpensiveProductPerCategory(Product.getMockProducts()));
         SpringApplication.run(Demo1Application.class, args);
     }
 
@@ -100,39 +107,9 @@ public class Demo1Application {
         };
     }
 
-}
-
-interface Vehicle {
-    void start();
-
-    void stop();
-
-    default void honk() {
-        System.out.println("Honk honk!");
-    }
-}
-
-class Car implements Vehicle {
-    @Override
-    public void start() {
-        System.out.println("Car started");
-    }
-
-    @Override
-    public void stop() {
-        System.out.println("Car stopped..");
-    }
+//    public static Map<String, Product> getMostExpensiveProductPerCategory(List<Product> products) {
+//        return products.stream().collect(Collectors.toMap(p -> p.getPrice() -, p -> p));
+//    }
 
 }
 
-class Bike implements Vehicle {
-    @Override
-    public void start() {
-        System.out.println("Bike started");
-    }
-
-    @Override
-    public void stop() {
-        System.out.println("Bike stopped");
-    }
-}

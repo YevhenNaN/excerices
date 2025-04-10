@@ -1,4 +1,4 @@
-package com.example.demo1;
+package com.example.demo1.model;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,7 +12,6 @@ public class Student {
         if (System.getenv(id) != null) {
             logger.error(String.format("%s, %s=%s", message, id, System.getenv(id)));
         }
-        System.out.println("sadaa");
         else {
             logger.error(message);
         }
