@@ -58,7 +58,6 @@ public class Demo1Application {
         System.out.println(enumSingleton.getInfo());
         EnumSingleton enumSingleton1 = EnumSingleton.INSTANCE.getInstance();
         enumSingleton1.setInfo("Last info class");
-        System.out.println(enumSingleton1.getInfo());
         System.out.println(enumSingleton.getInfo());
 
         //Prototype
